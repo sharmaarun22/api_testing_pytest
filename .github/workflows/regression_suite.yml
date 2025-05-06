@@ -28,21 +28,9 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Run tests and generate HTML report
+      - name: Run tests
         run: |
-          mkdir -p reports
-          pytest --html=reports/report.html
+          pytest --html=report.html
 
-      - name: Verify report was generated
-        run: |
-          if [ -f reports/report.html ]; then
-            echo "✅ Report generated successfully."
-          else
-            echo "❌ Report not found!" && exit 1
-          fi
-
-      - name: Upload HTML report as artifact
-        uses: actions/upload-artifact@v3
-        with:
-          name: pytest-report
-          path: reports/report.html
+      - name: List generated files (optional)
+        run: ls -la
